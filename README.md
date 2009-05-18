@@ -39,6 +39,14 @@ the terminal, then hit Enter in the terminal running Glassfish. That will reload
 the application, enabling a fairly rapid development cycle. (It's still not great
 though. If you have an idea to make it faster, please let me know.)
 
+To use the project in Eclipse, you must have the Eclipse Scala plugin installed.
+You should also do a full Maven build before using Eclipse, to ensure you have
+all the dependencies.
+Then you should be able to do "File -> Import -> General -> Existing Projects into
+Workspace" and be ready to go. Note that at the time of writing, the Eclipse Scala
+plugin appears to have a bug which causes it not to write any class files to the
+target directory.
+
 
 Useful links
 ------------
