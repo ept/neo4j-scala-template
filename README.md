@@ -19,7 +19,8 @@ How to use this template
 
 You need a Java 6 environment and Maven 2.0.9 or newer installed.
 
-Download this repository or clone it with `git`. You will probably want to
+Download this repository, or clone it with `git`, or merge it into your own
+git repository. You will probably want to
 search the files for occurrences of `example` and replace them with something
 more appropriate.
 
@@ -48,3 +49,10 @@ The main references you'll need for development:
 * Jersey Javadoc
 * Neo4j Javadoc
 * Scalatest
+
+
+License
+-------
+
+This code is (c) 2009 Martin Kleppmann, and is distributed under the terms of
+the BSD license. See the file LICENSE for details.
