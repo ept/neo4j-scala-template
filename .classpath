@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main/scala"/>
+	<classpathentry kind="src" output="target/webapp" path="src/main/webapp"/>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/scala"/>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="var" path="M2_REPO/asm/asm/3.1/asm-3.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/glassfish/embedded/glassfish-embedded-all/3.0-Prelude-Embedded-b10/glassfish-embedded-all-3.0-Prelude-Embedded-b10.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/sun/grizzly/grizzly-framework/1.9.8/grizzly-framework-1.9.8.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/sun/grizzly/grizzly-http/1.9.8/grizzly-http-1.9.8.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/sun/grizzly/grizzly-http-servlet/1.9.8/grizzly-http-servlet-1.9.8.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/sun/grizzly/grizzly-portunif/1.9.8/grizzly-portunif-1.9.8.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/sun/grizzly/grizzly-rcm/1.9.8/grizzly-rcm-1.9.8.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/sun/grizzly/grizzly-servlet-webserver/1.9.8/grizzly-servlet-webserver-1.9.8.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/sun/grizzly/grizzly-utils/1.9.8/grizzly-utils-1.9.8.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/sun/jersey/jersey-client/1.0.3/jersey-client-1.0.3.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/sun/jersey/jersey-core/1.0.3/jersey-core-1.0.3.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/sun/jersey/jersey-server/1.0.3/jersey-server-1.0.3.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/sun/jersey/test/framework/jersey-test-framework/1.0.3/jersey-test-framework-1.0.3.jar"/>
+	<classpathentry kind="var" path="M2_REPO/javax/ws/rs/jsr311-api/1.0/jsr311-api-1.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/javax/transaction/jta/1.1/jta-1.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/junit/junit/4.5/junit-4.5.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/jteigen/scalatest/junit4runner/1.0-SNAPSHOT/junit4runner-1.0-SNAPSHOT.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/neo4j/neo/1.0-b8/neo-1.0-b8.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/scala-lang/scala-library/2.7.4/scala-library-2.7.4.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/scala-tools/testing/scalatest/0.9.5/scalatest-0.9.5.jar"/>
+	<classpathentry kind="var" path="M2_REPO/javax/servlet/servlet-api/2.4/servlet-api-2.4.jar"/>
+	<classpathentry kind="con" path="ch.epfl.lamp.sdt.launching.SCALA_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>
