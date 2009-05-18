@@ -1,6 +1,7 @@
 package com.example
 
-import java.util.Properties
+import java.io.Serializable
+import java.util.{TreeMap, Properties}
 import org.neo4j.api.core.EmbeddedNeo
 
 /**
@@ -15,7 +16,21 @@ object NeoServer {
    */
   def startup(config: Properties) {
     if (neo != null) neo.shutdown
-    neo = new EmbeddedNeo(config.getProperty("path", "/tmp/neo4j"))
+    neo = new EmbeddedNeo(config.getProperty("neo4j.path", "/tmp/neo4j"))
+    
+    // Setup shell if required
+    val shell = config.getProperty("neo4j.shell.enabled", "false")
+    if (Array("true", "yes", "1") contains shell.toLowerCase) {
+      val shellProperties = new TreeMap[String, Serializable]
+      try {
+        shellProperties.put("port", Integer.parseInt(config.getProperty("neo4j.shell.port")))
+      } catch {
+        case _: NumberFormatException => // also catches getProperty == null
+      }
+      val shellName = config.getProperty("neo4j.shell.name")
+      if (shellName != null) shellProperties.put("name", shellName)
+      neo.enableRemoteShell(shellProperties)
+    }
   }
 
   /**

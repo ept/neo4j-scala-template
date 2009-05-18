@@ -72,6 +72,12 @@
       <artifactId>neo</artifactId>
       <version>1.0-b8</version>
     </dependency>
+
+    <dependency>
+      <groupId>org.neo4j</groupId>
+      <artifactId>shell</artifactId>
+      <version>1.0-b8</version>
+    </dependency>
   </dependencies>
 
   <build>
