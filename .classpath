@@ -22,6 +22,11 @@
 	<classpathentry kind="var" path="M2_REPO/junit/junit/4.5/junit-4.5.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/jteigen/scalatest/junit4runner/1.0-SNAPSHOT/junit4runner-1.0-SNAPSHOT.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/neo4j/neo/1.0-b8/neo-1.0-b8.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/neo4j/index-util/0.6-SNAPSHOT/index-util-0.6-SNAPSHOT.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/lucene/lucene-core/2.4.0/lucene-core-2.4.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/neo4j/neo-component-commons/0.1-SNAPSHOT/neo-component-commons-0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/neo4j/neo-utils/1.0-b8-SNAPSHOT/neo-utils-1.0-b8-SNAPSHOT.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/neo4j/shell/1.0-b8/shell-1.0-b8.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/scala-lang/scala-library/2.7.4/scala-library-2.7.4.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/scala-tools/testing/scalatest/0.9.5/scalatest-0.9.5.jar"/>
 	<classpathentry kind="var" path="M2_REPO/javax/servlet/servlet-api/2.4/servlet-api-2.4.jar"/>
