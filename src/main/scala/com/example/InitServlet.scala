@@ -1,6 +1,6 @@
 package com.example
 
-import java.io.{InputStreamReader, IOException}
+import java.io.IOException
 import java.util.Properties
 import java.util.logging.Logger
 import javax.servlet.http.HttpServlet
@@ -19,7 +19,7 @@ class InitServlet extends HttpServlet {
     val neoConfig = new Properties
     try {
       val config = getServletContext.getResourceAsStream("/WEB-INF/neo4j.properties")
-      neoConfig.load(new InputStreamReader(config))
+      neoConfig.load(config)
     } catch {
       case e: IOException => log.info("Cannot read Neo4j configuration: " + e)
     }

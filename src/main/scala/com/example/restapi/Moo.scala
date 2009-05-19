@@ -5,9 +5,10 @@ import javax.ws.rs._
 import javax.ws.rs.core._
 
 import com.example.NeoServer
+import com.example.models._
 
-@Path("/moo/{id}")
-class Moo extends RequiredParam {
+@Path("/moo")
+class MooResource extends RequiredParam {
 
   val log = Logger.getLogger(this.getClass.getName)
   
@@ -22,7 +23,7 @@ class Moo extends RequiredParam {
   @Consumes(Array(MediaType.APPLICATION_JSON))
   @Produces(Array(MediaType.APPLICATION_JSON))
   def createJSON = {
-    
+    ""
   }
 
   /**
@@ -43,12 +44,13 @@ class Moo extends RequiredParam {
    * to the newest version is issued (unless the query parameter <tt>?redirect=no</tt>
    * is given, in which case the old version is returned).
    */
-  @GET
+  @GET @Path("/{id}")
   @Produces(Array(MediaType.APPLICATION_JSON))
   def readJSON(@PathParam("id") id: String,
                @QueryParam("redirect") @DefaultValue("yes") redirect: String) = {
     requiredParam("id", id)
-    
+    //new Test("asdf", 1.0, 42)
+    new Moo("brown")
   }
 
   /**
@@ -57,7 +59,7 @@ class Moo extends RequiredParam {
    * to the newest version is issued (unless the query parameter <tt>?redirect=no</tt>
    * is given, in which case the old version is returned).
    */
-  @GET
+  @GET @Path("/{id}")
   @Produces(Array(MediaType.TEXT_HTML))
   def readHTML(@PathParam("id") id: String,
                @QueryParam("redirect") @DefaultValue("yes") redirect: String) = {
@@ -67,7 +69,7 @@ class Moo extends RequiredParam {
       "moo"
     })
   }
-  
+
   /**
    * <tt>PUT /moo/&lt;id&gt;</tt> with a JSON document as body updates the entity
    * with the given ID to new data, and returns a JSON document of the form:
@@ -75,21 +77,21 @@ class Moo extends RequiredParam {
    * If the database already contains a newer version of the
    * entity than the specified one, a HTTP 409 "Conflict" error is returned.
    */
-  @PUT
+  @PUT @Path("/{id}")
   @Consumes(Array(MediaType.APPLICATION_JSON))
   @Produces(Array(MediaType.APPLICATION_JSON))
   def updateJSON(@PathParam("id") id: String) = {
     requiredParam("id", id)
-    
+    ""
   }
-  
+
   /**
    * <tt>PUT /moo/&lt;id&gt;</tt> with an URLencoded HTML form as body updates the entity
    * with the given ID to the new data, and issues a HTTP redirect to
    * <tt>/moo/&lt;new id&gt;</tt>. If the database already contains a newer version of the
    * entity than the specified one, a HTTP 409 "Conflict" error is returned.
    */
-  @PUT
+  @PUT @Path("/{id}")
   @Consumes(Array(MediaType.APPLICATION_FORM_URLENCODED))
   @Produces(Array(MediaType.TEXT_HTML))
   def updateHTML(@PathParam("id") id: String) = {
@@ -97,19 +99,19 @@ class Moo extends RequiredParam {
     val newId = 1
     Response.seeOther(resourceURI(newId)).build
   }
-  
+
   /**
    * <tt>DELETE /moo/&lt;id&gt;</tt> marks the entity with the given ID as deleted.
    * If the database already contains a newer version of the
    * entity than the specified one, a HTTP 409 "Conflict" error is returned.
    */
-  @DELETE
+  @DELETE @Path("/{id}")
   @Produces(Array(MediaType.WILDCARD))
   def delete(@PathParam("id") id: String) = {
     requiredParam("id", id)
-    
+    Response.ok.build
   }
-  
+
   /**
    * Simulates <tt>PUT</tt> and <tt>DELETE</tt> methods for web browsers which do not
    * support them. The mapping is: <pre>
@@ -117,10 +119,10 @@ class Moo extends RequiredParam {
    *    POST /moo/&lt;id&gt;?method=delete   --&gt;   DELETE /moo/&lt;id&gt;
    * </pre>
    */
-  @POST
+  @POST @Path("/{id}")
   @Consumes(Array(MediaType.APPLICATION_FORM_URLENCODED))
   @Produces(Array(MediaType.TEXT_HTML))
-  def simulatePutDelete(@PathParam("id") id: String, @QueryParam("method") method: String) = {
+  def simulatePutDelete(@PathParam("id") id: String, @QueryParam("method") method: String): Response = {
     method match {
       case "put" => updateHTML(id)
       case "delete" => delete(id)
