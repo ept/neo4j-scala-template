@@ -6,6 +6,12 @@
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="var" path="M2_REPO/asm/asm/3.1/asm-3.1.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/glassfish/embedded/glassfish-embedded-all/3.0-Prelude-Embedded-b10/glassfish-embedded-all-3.0-Prelude-Embedded-b10.jar"/>
+	<classpathentry kind="var" path="M2_REPO/commons-beanutils/commons-beanutils/1.7.0/commons-beanutils-1.7.0.jar"/
+	<classpathentry kind="var" path="M2_REPO/commons-collections/commons-collections/3.2/commons-collections-3.2.jar
+	<classpathentry kind="var" path="M2_REPO/commons-lang/commons-lang/2.4/commons-lang-2.4.jar"/>
+	<classpathentry kind="var" path="M2_REPO/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/net/sf/ezmorph/ezmorph/1.0.6/ezmorph-1.0.6.jar"/>
+	<classpathentry kind="var" path="M2_REPO/net/sf/json-lib/json-lib/2.2.3/json-lib-2.2.3-jdk15.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/sun/grizzly/grizzly-framework/1.9.8/grizzly-framework-1.9.8.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/sun/grizzly/grizzly-http/1.9.8/grizzly-http-1.9.8.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/sun/grizzly/grizzly-http-servlet/1.9.8/grizzly-http-servlet-1.9.8.jar"/>
