@@ -78,13 +78,28 @@ object NeoJsonConverter {
    * of that node are updated to match the JSON description; if null, a new node is created.
    * In either case, the up-to-date node is returned.
    */
-  def jsonToNeo(obj: JSONObject, neo: NeoService, existingNode: Node): Node = {
-    null
+  def jsonToNeo(json: JSONObject, neo: NeoService, existingNode: Node): Node = {
+    val node = if (existingNode == null) neo.createNode else existingNode
+    // Keep track of any of the node's properties + relationships not present in the JSON
+    val deleteProp = new scala.collection.mutable.HashSet[String]
+    if (existingNode != null) for (key <- node.getPropertyKeys) deleteProp += key
+    // Update node with properties from JSON
+    for (key <- json.keys.asInstanceOf[java.util.Iterator[String]]) {
+      if (!(Array("_id", "_in", "_out") contains key)) {
+          node.setProperty(key, json.get(key))
+          deleteProp -= key
+      }
+    }
+    // Delete any unused properties
+    for (key <- deleteProp) node.removeProperty(key)
+    node
   }
 
-  /**
-   * Implicitly convert a Java iterable to a Scala iterator.
-   */
+  /** Implicitly convert a Java iterable to a Scala iterator. */
   implicit def java2scala[T](iter: java.lang.Iterable[T]): scala.Iterator[T] =
     new scala.collection.jcl.MutableIterator.Wrapper(iter.iterator)
+  
+  /** Implicitly convert a Java iterator to a Scala iterator. */
+  implicit def java2scala[T](iter: java.util.Iterator[T]): scala.Iterator[T] =
+    new scala.collection.jcl.MutableIterator.Wrapper(iter)
 }
