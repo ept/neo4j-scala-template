@@ -27,11 +27,11 @@ object NeoJsonConverter {
    *   "property1": "value1",
    *   "property2": 42,
    *   "_out": {
-   *     "KNOWS": [ {"_end": 1235, "property": "value"} ],
-   *     "LIKES": [ {"_end": 1236} ]
+   *     "KNOWS": [ {"_end": 1235, "property": "value"}, {"_end": 1236} ],
+   *     "LIKES": {"_end": 1237}
    *   },
    *   "_in": {
-   *     "KNOWS": [ {"_start": 1233} ]
+   *     "KNOWS": {"_start": 1233}
    *   }
    * }</pre>
    */
@@ -61,31 +61,29 @@ object NeoJsonConverter {
   private def neoRelationshipsToJson(node: Node, direction: Direction): JSONObject = {
     val obj = new JSONObject
     for (rel <- node.getRelationships(direction)) {
-      val relName = rel.getType.name
-
-      // Get or create the JSONArray
-      val arr = try {
-        obj.getJSONArray(relName)
-      } catch {
-        case e: JSONException =>
-          val newArr = new JSONArray
-          obj.put(relName, newArr)
-          newArr
-      }
-
-      // Add the relationship object to the array
-      arr.put {
+      obj.accumulate(rel.getType.name, {
         val relObj = new JSONObject
         relObj.put(if (rel.getStartNode == node) "_end" else "_start", rel.getOtherNode(node).getId)
         neoPropertiesToJson(rel, relObj)
         relObj
-      }
+      })
     }
     obj
   }
 
+
   /**
-   * Convert a Java iterable to a Scala iterator.
+   * Parses properties and relationships out of a JSON object in the form as documented
+   * on <tt>neoToJson</tt>. If <tt>existingNode</tt> is given, the properties and relationships
+   * of that node are updated to match the JSON description; if null, a new node is created.
+   * In either case, the up-to-date node is returned.
+   */
+  def jsonToNeo(obj: JSONObject, neo: NeoService, existingNode: Node): Node = {
+    null
+  }
+
+  /**
+   * Implicitly convert a Java iterable to a Scala iterator.
    */
   implicit def java2scala[T](iter: java.lang.Iterable[T]): scala.Iterator[T] =
     new scala.collection.jcl.MutableIterator.Wrapper(iter.iterator)
