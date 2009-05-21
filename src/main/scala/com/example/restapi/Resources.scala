@@ -7,10 +7,8 @@ import javax.xml.bind.JAXBContext
 /**
  * Defines the conversion of bean objects to/from JSON.
  */
-/*
 @Provider
 class JAXBContextResolver extends ContextResolver[JAXBContext] {
   private val context = new JSONJAXBContext(JSONConfiguration.natural.build, "com.example.models")
-  override def getContext(objectType: Class[_]) = context
+  override def getContext(objectType: Class[_]): JAXBContext = context
 }
-*/
