@@ -2,14 +2,14 @@ package com.example
 
 import java.io.Serializable
 import java.util.{TreeMap, Properties}
-import org.neo4j.api.core.EmbeddedNeo
+import org.neo4j.api.core.{EmbeddedNeo, NeoService}
 
 /**
  * Wrapper around a singleton instance of Neo4j embedded server.
  */
 object NeoServer {
 
-  private var neo: EmbeddedNeo = null
+  private var neo: NeoService = null
 
   /**
    * Initialize Neo4j with configuration from a properties file.
@@ -45,7 +45,7 @@ object NeoServer {
    * Execute instructions within a Neo4j transaction; rollback if exception is raised and
    * commit otherwise; and return the return value from the operation.
    */
-  def exec[T<:AnyRef](operation: EmbeddedNeo => T): T = {
+  def exec[T<:AnyRef](operation: NeoService => T): T = {
     val tx = neo.beginTx
     try {
       val ret = operation(neo)

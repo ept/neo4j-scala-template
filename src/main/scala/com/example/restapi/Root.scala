@@ -14,7 +14,7 @@ class Root extends RequiredParam {
   @GET @Produces(Array("text/html"))
   def helloWorld: String = {
     NeoServer.exec(neo => {
-      val firstNode = neo.createNode
+      val firstNode = neo.getReferenceNode
       val secondNode = neo.createNode
       val relationship = firstNode.createRelationshipTo(secondNode, Predicates.KNOWS)
       firstNode.setProperty("message", "Hello, ")

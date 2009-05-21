@@ -3,6 +3,8 @@ package com.example.restapi
 import javax.ws.rs._
 import javax.ws.rs.core._
 
+import org.neo4j.api.core.{NeoService, Node, NotFoundException}
+
 /**
  * Encapsulates the value of a parameter passed to the API (e.g. type of a @FormParam or
  * @QueryParam parameter). Subclass and implement the 'parse' method, throwing an exception
@@ -23,6 +25,31 @@ abstract class ParamType[V](param: String) {
   def paramName: String
   
   override def toString = value.toString
+}
+
+
+/**
+ * Type for Neo4j a node referenced by ID.
+ */
+class NeoNodeParam(param: String) extends ParamType[Int](param) {
+  def paramName = "node ID"
+
+  def parse(param: String): Int = java.lang.Integer.parseInt(param)
+
+  /**
+   * Tries to find a node in a Neo server instance, raises HTTP 404 ("not found") if the node does
+   * not exist.
+   */
+  def getNode(neo: NeoService): Node = {
+    try {
+      neo.getNodeById(value)
+    } catch {
+      case e: NotFoundException => throw new WebApplicationException(
+        Response.status(Response.Status.NOT_FOUND)
+          .entity("No node found with ID " + value).build
+      )
+    }
+  }
 }
 
 
