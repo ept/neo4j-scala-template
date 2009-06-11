@@ -83,5 +83,12 @@ The main references you'll need for development:
 License
 -------
 
-This code is (c) 2009 Martin Kleppmann, and is distributed under the terms of
-the BSD license. See the file LICENSE for details.
+Copyright (c) 2009 Martin Kleppmann.
+
+This program is free software: you can redistribute it and/or modify it under the terms of
+the GNU Affero General Public License as published by the Free Software Foundation, version 3.
+See `LICENSE.txt` for details.
+
+Please note that the Affero GPL does not allow you to use this software in a closed-source
+web application. If distributing the source of your application is not acceptable to you,
+please contact [Ept Computing](http://www.eptcomputing.com/) to obtain a commercial license.
