@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet
  * Here we set up the Neo4j server for the rest of the application to use.
  */
 class InitServlet extends HttpServlet {
-  val log = Logger.getLogger(this.getClass.getName) 
+  private val log = Logger.getLogger(this.getClass.getName)
 
   override def init {
     log.info("Initializing Neo4J server.")
