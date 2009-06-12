@@ -29,10 +29,26 @@ You need a Java 5 (or newer) environment and Maven 2.0.9 (or newer) installed:
     OS name: "darwin" version: "9.7.0" arch: "i386" Family: "unix"
 
 Install the [JUnit4 Runner for ScalaTest](http://github.com/teigen/scalatest-junit4runner/tree/master)
-as described in its [README file](http://github.com/teigen/scalatest-junit4runner/blob/master/README.textile).
+as follows:
 
-Download this repository, or clone it with `git`, or merge it into your own
-git repository, by running one of the following:
+    $ git clone git://github.com/teigen/scalatest-junit4runner.git
+    $ cd scalatest-junit4runner
+    $ mvn clean install
+
+(If you're not familiar with Maven -- the first time you
+build a project, it downloads what seems like the entire universe to a local repository
+in your home directory (all the dependencies of this project and the plugins it needs
+to build and run it). It gets much better after that first time.)
+
+Next, install the [Neo4j resources library](http://github.com/ept/neo4j-resources/tree/master) --
+if you get errors, please see the Troubleshooting section below.
+
+    $ git clone git://github.com/ept/neo4j-resources.git
+    $ cd neo4j-resources
+    $ mvn clean install
+
+Finally, download this repository, or clone it with `git`, or merge it into your own
+git repository, by one of the following:
 
 * Download [ZIP file](http://github.com/ept/neo4j-scala-template/zipball/master) or
   [tarball](http://github.com/ept/neo4j-scala-template/tarball/master)
@@ -40,10 +56,8 @@ git repository, by running one of the following:
 * `git pull git://github.com/ept/neo4j-scala-template.git` (merge into existing project)
 
 Once that is done, open a shell, `cd` to the directory you just checked out, and run
-`mvn package` to do a full build. If you're not familiar with Maven -- the first time you
-build a project, it downloads what seems like the entire universe to a local repository
-in your home directory (all the dependencies of this project and the plugins it needs
-to build and run it). It gets much better after that first time.
+`mvn package` to do a full build. Congratulations, you've got a working Neo4j server
+complete with JSON REST interface!
 
 Out of the box, this template is set up to support the following goals:
 
@@ -118,7 +132,7 @@ The main references you'll need for development:
 License
 -------
 
-Copyright (c) 2009 Martin Kleppmann.
+Copyright (c) 2009 Ept Computing. Developed by Martin Kleppmann.
 
 This program is free software: you can redistribute it and/or modify it under the terms of
 the GNU Affero General Public License as published by the Free Software Foundation, version 3.
