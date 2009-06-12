@@ -4,8 +4,8 @@ Neo4j/Scala/Jersey project template
 * You want to develop an application using the [Neo4j](http://neo4j.org)
   open source graph database?
 * You want to write your code in beautiful [Scala](http://www.scala-lang.org)?
-* You want to expose your database through a nice clean REST API, implemented
-  with [Jersey/JSR311]()?
+* You want to expose your database through a nice clean JSON REST API,
+  implemented with [Jersey/JSR311]()?
 * You want to get up and running quickly?
 
 Then you've come to the right place. This repository contains a rough outline
@@ -14,15 +14,30 @@ dependencies, an Eclipse project with all the right build settings, and
 examples of how to write tests. You'll be up and running in no time.
 
 
-How to use this template
-------------------------
+Building this template
+----------------------
 
-You need a Java 5 environment and Maven 2.0.9 or newer installed.
+Start by building and running this project; it contains some examples which
+you can start playing with, and then expand to match your own needs once you
+are comfortable with them.
+
+You need a Java 5 (or newer) environment and Maven 2.0.9 (or newer) installed:
+
+    $ mvn --version
+    Maven version: 2.0.10
+    Java version: 1.6.0_03-p3
+    OS name: "darwin" version: "9.7.0" arch: "i386" Family: "unix"
+
+Install the [JUnit4 Runner for ScalaTest](http://github.com/teigen/scalatest-junit4runner/tree/master)
+as described in its [README file](http://github.com/teigen/scalatest-junit4runner/blob/master/README.textile).
 
 Download this repository, or clone it with `git`, or merge it into your own
-git repository. You will probably want to
-search the files for occurrences of `example` and replace them with something
-more appropriate.
+git repository, by running one of the following:
+
+* Download [ZIP file](http://github.com/ept/neo4j-scala-template/zipball/master) or
+  [tarball](http://github.com/ept/neo4j-scala-template/tarball/master)
+* `git clone git://github.com/ept/neo4j-scala-template.git` (new project)
+* `git pull git://github.com/ept/neo4j-scala-template.git` (merge into existing project)
 
 Out of the box, this template is set up to support the following goals:
 
@@ -41,20 +56,6 @@ Workspace" and be ready to go. Note that at the time of writing, the Eclipse Sca
 plugin appears to have a bug which causes it not to write any class files to the
 target directory.
 
-This project includes an example resource called `neo_resource`, which you can use
-as basis to get started. Just run `mvn jetty:run` and use [cURL](http://curl.haxx.se/)
-to access the REST API:
-
-    $ curl -i -HAccept:application/json -HContent-type:application/json \
-        -d'{"name":"my first test node","_out":{"KNOWS":0}}' -XPOST \
-        http://localhost:8080/neo_resource
-
-    $ curl -i -HAccept:application/json http://localhost:8080/neo_resource/0
-
-(This example uses the assumption that a node with ID 0 exists, which is Neo's
-reference node in the current implementation -- you shouldn't rely on the
-reference node having ID 0 though.)
-
 
 Troubleshooting
 ---------------
@@ -67,6 +68,27 @@ loaded from the bootstrap classloader, but this RI needs 2.1 API" when executing
 
 Depending on your operating system you may need to to adjust the path above to point
 to your Maven repository.
+
+
+Using this template
+-------------------
+
+This project includes an example resource called `neo_resource`, which you can use
+as basis to get started. Just run `mvn jetty:run` and use [cURL](http://curl.haxx.se/)
+to access the REST API:
+
+    $ curl -i -HAccept:application/json -HContent-type:application/json \
+        -d'{"name":"my first test node","_out":{"KNOWS":0}}' -XPOST \
+        http://localhost:8080/neo_resource
+
+    $ curl -i -HAccept:application/json http://localhost:8080/neo_resource/0
+
+(This example is based on the assumption that a node with ID 0 exists, which is Neo's
+reference node in the current implementation -- you shouldn't rely on the
+reference node having ID 0 though.)
+
+Moving forward, you will probably want to search the files for occurrences of
+`example` and replace them with something more appropriate.
 
 
 Useful links
