@@ -6,6 +6,7 @@
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java"/>
 	<classpathentry kind="var" path="M2_REPO/asm/asm/3.1/asm-3.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/eptcomputing/neo4j-resources/1.0-SNAPSHOT/neo4j-resources-1.0-SNAPSHOT.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/jteigen/scalatest/junit4runner/1.0-SNAPSHOT/junit4runner-1.0-SNAPSHOT.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/sun/grizzly/grizzly-framework/1.9.8/grizzly-framework-1.9.8.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/sun/grizzly/grizzly-http-servlet/1.9.8/grizzly-http-servlet-1.9.8.jar"/>
