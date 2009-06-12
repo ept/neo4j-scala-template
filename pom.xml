@@ -154,6 +154,7 @@
             <include>**/*TestCase.class</include>
             <include>**/*Spec.class</include>
           </includes>
+          <argLine>-Djava.endorsed.dirs=${settings.localRepository}/javax/xml/bind/jaxb-api/2.1 -Dneo4j.config=src/main/webapp/WEB-INF/neo4j.properties</argLine>
         </configuration>
       </plugin>
     </plugins>
