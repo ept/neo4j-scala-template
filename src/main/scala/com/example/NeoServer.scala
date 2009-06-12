@@ -36,8 +36,6 @@ object NeoServer {
    * servlet context.
    */
   def startup(context: ServletContext) {
-    // Load Neo4j configuration from properties file. You may want to replace this with something
-    // more clever, e.g. loading different configs for development/staging/production environments.
     val stream = context.getResourceAsStream("/WEB-INF/neo4j.properties")
     if (stream == null) {
       log.warning("Cannot read Neo4j configuration from /WEB-INF/neo4j.properties: resource not found")
@@ -57,28 +55,37 @@ object NeoServer {
     } catch {
       case e: IOException => log.warning("Cannot read Neo4j configuration: " + e)
     }
-    NeoServer.startup(neoConfig)
+    val environment = System.getProperty("neo4j.env", "development")
+    NeoServer.startup(neoConfig, environment)
   }
 
   /**
-   * Initialize Neo4j with configuration from a properties file.
+   * Initialize Neo4j with configuration from a properties file and an environment string
+   * (typically "development", "test" or "production").
    */
-  def startup(config: Properties) {
+  def startup(config: Properties, environment: String) {
+    def prop(key: String, default: String) =
+      config.getProperty("neo4j.%s.%s".format(environment, key),
+         config.getProperty("neo4j.%s".format(key), default))
+
+    def isTrue(value: String) = (value != null) && (Array("true", "yes", "1") contains value.toLowerCase)
+
     synchronized {
       if (neo != null) return
-      log.info("Initializing Neo4j server")
-      neo = new EmbeddedNeo(config.getProperty("neo4j.path", "/tmp/neo4j"))
+      val neoPath = prop("path", "/tmp/neo4j")
+      log.info("Initializing Neo4j server in %s environment with data files in %s".format(environment, neoPath))
+
+      neo = new EmbeddedNeo(neoPath)
 
       // Setup shell if required
-      val shell = config.getProperty("neo4j.shell.enabled", "false")
-      if (Array("true", "yes", "1") contains shell.toLowerCase) {
+      if (isTrue(prop("shell.enabled", "false"))) {
         val shellProperties = new TreeMap[String, Serializable]
         try {
-          shellProperties.put("port", Integer.parseInt(config.getProperty("neo4j.shell.port")))
+          shellProperties.put("port", Integer.parseInt(prop("shell.port", "1337")))
         } catch {
           case _: NumberFormatException => // also catches getProperty == null
         }
-        val shellName = config.getProperty("neo4j.shell.name")
+        val shellName = prop("shell.name", null)
         if (shellName != null) shellProperties.put("name", shellName)
         neo.enableRemoteShell(shellProperties)
       }

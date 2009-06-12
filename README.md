@@ -96,6 +96,13 @@ reference node having ID 0 though.)
 Moving forward, you will probably want to search the files for occurrences of
 `example` and replace them with something more appropriate.
 
+`src/main/webapp/WEB-INF/neo4j.properties` contains the settings for Neo4j (location of
+the database files, whether to enable the remote shell, etc.). You can provide different
+settings for different environments; `development`, `test` and `production` are provided
+as example. By default, `mvn test` runs in the `test` environment, and the web application
+runs in the `development` environment. On your production server, set the system property
+`neo4j.env=production` in your web container to activate the production environment.
+
 
 Useful links
 ------------
