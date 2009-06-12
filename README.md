@@ -39,6 +39,12 @@ git repository, by running one of the following:
 * `git clone git://github.com/ept/neo4j-scala-template.git` (new project)
 * `git pull git://github.com/ept/neo4j-scala-template.git` (merge into existing project)
 
+Once that is done, open a shell, `cd` to the directory you just checked out, and run
+`mvn package` to do a full build. If you're not familiar with Maven -- the first time you
+build a project, it downloads what seems like the entire universe to a local repository
+in your home directory (all the dependencies of this project and the plugins it needs
+to build and run it). It gets much better after that first time.
+
 Out of the box, this template is set up to support the following goals:
 
 * `mvn package` -- Compile, test and bundle into a `war` file for deployment to
