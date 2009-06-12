@@ -50,6 +50,20 @@ class NeoNodeParam(param: String) extends ParamType[Int](param) {
       )
     }
   }
+
+  /**
+   * Tries to delete a node in a Neo server instance, raises HTTP 404 ("not found") if the node
+   * does not exist.
+   */
+  def deleteNode(neo: NeoService) {
+    val node = getNode(neo)
+    node.getRelationships.foreach{_.delete}
+    node.delete
+  }
+
+  /** Implicitly convert a Java iterable to a Scala iterator. */
+  private implicit def java2scala[T](iter: java.lang.Iterable[T]): scala.Iterator[T] =
+    new scala.collection.jcl.MutableIterator.Wrapper(iter.iterator)
 }
 
 

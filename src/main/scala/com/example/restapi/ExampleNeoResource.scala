@@ -10,7 +10,8 @@ import com.example.NeoServer
 import NeoJsonConverter._
 
 /**
- * A straightforward JSON resource where an entity maps directly to a Neo4j node.
+ * A straightforward Create/Read/Update/Delete JSON resource where an entity maps
+ * directly to a Neo4j node.
  */
 @Path("/neo_resource")
 class ExampleNeoResource extends RequiredParam {
@@ -41,6 +42,36 @@ class ExampleNeoResource extends RequiredParam {
     requiredParam("id", node)
     NeoServer.exec {
       neo => neoToJson(node.getNode(neo))
+    }
+  }
+
+  /**
+   * <tt>PUT /neo_resource/&lt;id&gt;</tt> with a JSON document as body replaces an
+   * existing entity with the contents of that document. Returns the same as you would
+   * get from a subsequent <tt>GET</tt> of the same URL.
+   */
+  @PUT @Path("/{id}")
+  @Consumes(Array(MediaType.APPLICATION_JSON))
+  @Produces(Array(MediaType.APPLICATION_JSON))
+  def updateJSON(@PathParam("id") node: NeoNodeParam, json: JSONObject) = {
+    requiredParam("id", node)
+    NeoServer.exec {
+      neo => neoToJson(jsonToNeo(json, neo, node.getNode(neo)))
+    }
+  }
+
+  /**
+   * <tt>DELETE /neo_resource/&lt;id&gt;</tt> deletes the entity with the given ID.
+   * Returns a JSON representation of the entity that was deleted.
+   */
+  @DELETE @Path("/{id}")
+  @Produces(Array(MediaType.APPLICATION_JSON))
+  def deleteJSON(@PathParam("id") node: NeoNodeParam) = {
+    requiredParam("id", node)
+    NeoServer.exec { neo =>
+      val json = neoToJson(node.getNode(neo))
+      node.deleteNode(neo)
+      json
     }
   }
 }
