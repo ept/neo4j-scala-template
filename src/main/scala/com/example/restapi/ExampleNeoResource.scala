@@ -17,15 +17,17 @@ class ExampleNeoResource extends RequiredParam {
 
   /**
    * <tt>POST /neo_resource</tt> with a JSON document as body creates a new entity
-   * from that document, and returns it in a JSON representation which includes
-   * the new entity's ID.
+   * from that document, and returns a HTTP 201 "Created" response with a Location
+   * header indicating the URL of the newly created entity.
    */
   @POST
   @Consumes(Array(MediaType.APPLICATION_JSON))
   @Produces(Array(MediaType.APPLICATION_JSON))
   def createJSON(json: JSONObject) = {
-    NeoServer.exec {
-      neo => neoToJson(jsonToNeo(json, neo, null))
+    NeoServer.exec { neo =>
+      val node = jsonToNeo(json, neo, null)
+      val uri = UriBuilder.fromResource(this.getClass).path("{id}").build(new java.lang.Long(node.getId))
+      Response.created(uri).entity(neoToJson(node)).build
     }
   }
 
