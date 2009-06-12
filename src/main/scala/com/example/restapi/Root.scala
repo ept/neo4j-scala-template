@@ -3,7 +3,8 @@ package com.example.restapi
 import java.util.logging.Logger
 import javax.ws.rs._
 
-import com.example.NeoServer
+import com.eptcomputing.neo4j.NeoServer
+import com.eptcomputing.neo4j.rest.RequiredParam
 import com.example.model.Predicates
 
 @Path("/")

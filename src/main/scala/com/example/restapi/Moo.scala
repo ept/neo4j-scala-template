@@ -4,7 +4,8 @@ import java.util.logging.Logger
 import javax.ws.rs._
 import javax.ws.rs.core._
 
-import com.example.NeoServer
+import com.eptcomputing.neo4j.NeoServer
+import com.eptcomputing.neo4j.rest.RequiredParam
 import com.example.models._
 
 @Path("/moo")

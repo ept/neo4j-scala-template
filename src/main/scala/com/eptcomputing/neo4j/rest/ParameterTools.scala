@@ -1,4 +1,4 @@
-package com.example.restapi
+package com.eptcomputing.neo4j.rest
 
 import javax.ws.rs._
 import javax.ws.rs.core._
@@ -81,4 +81,3 @@ trait RequiredParam {
     }
   }
 }
-

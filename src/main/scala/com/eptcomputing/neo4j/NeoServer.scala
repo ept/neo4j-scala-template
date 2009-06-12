@@ -1,4 +1,4 @@
-package com.example
+package com.eptcomputing.neo4j
 
 import java.io.{File, FileInputStream, FileNotFoundException, InputStream, IOException, Serializable}
 import java.util.{TreeMap, Properties}

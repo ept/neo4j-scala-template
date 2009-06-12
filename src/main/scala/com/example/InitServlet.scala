@@ -1,6 +1,7 @@
 package com.example
 
 import javax.servlet.http.HttpServlet
+import com.eptcomputing.neo4j.NeoServer
 
 /**
  * This servlet is automatically initialized when the web app is started.

@@ -1,4 +1,4 @@
-package com.example.restapi;
+package com.eptcomputing.neo4j.rest;
 
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.UniformInterfaceException;
@@ -19,7 +19,7 @@ import org.codehaus.jettison.json.JSONObject;
 public class NeoResourceTest extends JerseyTest {
 
     public NeoResourceTest() throws Exception {
-        super("com.example.restapi");
+        super("com.eptcomputing.neo4j.rest.test");
     }
 
     /**
