@@ -1,9 +1,10 @@
 package com.example
 
-import java.io.{FileInputStream, FileNotFoundException, InputStream, IOException, Serializable}
+import java.io.{File, FileInputStream, FileNotFoundException, InputStream, IOException, Serializable}
 import java.util.{TreeMap, Properties}
 import java.util.logging.Logger
 import javax.servlet.ServletContext
+import org.apache.commons.io.FileUtils
 import org.neo4j.api.core.{EmbeddedNeo, NeoService}
 
 /**
@@ -74,6 +75,12 @@ object NeoServer {
       if (neo != null) return
       val neoPath = prop("path", "/tmp/neo4j")
       log.info("Initializing Neo4j server in %s environment with data files in %s".format(environment, neoPath))
+
+      // Delete the database if configured (DANGEROUS - use for test environment only)
+      if (isTrue(prop("destroy_on_startup", "false"))) {
+        log.info("Destroying any old Neo4j data files in %s".format(neoPath))
+        try { FileUtils.deleteDirectory(new File(neoPath)) } catch { case _: IOException => }
+      }
 
       neo = new EmbeddedNeo(neoPath)
 
