@@ -5,7 +5,7 @@ import javax.ws.rs._
 
 import com.eptcomputing.neo4j.NeoServer
 import com.eptcomputing.neo4j.rest.RequiredParam
-import com.example.model.Predicates
+import com.example.models.Predicates
 
 @Path("/")
 class Root extends RequiredParam {

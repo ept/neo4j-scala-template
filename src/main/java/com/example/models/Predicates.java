@@ -1,4 +1,4 @@
-package com.example.model;
+package com.example.models;
 
 import org.neo4j.api.core.RelationshipType;
 
