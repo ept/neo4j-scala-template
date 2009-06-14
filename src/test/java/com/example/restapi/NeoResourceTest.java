@@ -24,7 +24,7 @@ import org.codehaus.jettison.json.JSONObject;
 public class NeoResourceTest extends JerseyTest {
 
     public NeoResourceTest() throws Exception {
-        super("com.eptcomputing.neo4j.rest.test");
+        super("com.example.restapi");
     }
 
     /**
