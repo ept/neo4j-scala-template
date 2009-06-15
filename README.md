@@ -93,19 +93,41 @@ to your Maven repository.
 Using this template
 -------------------
 
-This project includes an example resource called `neo_resource`, which you can use
-as basis to get started. Just run `mvn jetty:run` and use [cURL](http://curl.haxx.se/)
-to access the REST API:
+This project includes several example resources, each of which illustrates a different
+way of wrapping Neo4j in a domain-specific REST API. Depending on the structure of your
+data, any existing code you need to use and your personal preferences, you may choose
+whichever suits you. Please read the comments in the code to find out more -- the code
+is quite concise so you won't be overwhelmed.
 
+These resources are set up to work out of the box (with the Neo4j database stored in
+`/tmp/neo4j_dev`). Just run `mvn jetty:run` and use [cURL](http://curl.haxx.se/)
+to access the REST API.
+
+For example, one is called `neo_resource`, and it implements a full CRUD
+(create/read/update/delete) pattern for a single node. Once your app is running
+(`mvn jetty:run`), you can play with it as follows:
+
+    # Create a new node with a KNOWS relationship to the reference node
     $ curl -i -HAccept:application/json -HContent-type:application/json \
-        -d'{"name":"my first test node","_out":{"KNOWS":0}}' -XPOST \
+        -d'{"name":"my first test node","_in":{"KNOWS":0}}' -XPOST \
         http://localhost:8080/neo_resource
 
+    # Query the reference node -- it should have an outgoing relationship to
+    # the node we just created
     $ curl -i -HAccept:application/json http://localhost:8080/neo_resource/0
 
 (This example is based on the assumption that a node with ID 0 exists, which is Neo's
 reference node in the current implementation -- you shouldn't rely on the
 reference node having ID 0 though.)
+
+The `stats` resource is an example of a read-only query involving a graph traversal.
+It starts with a particular node and counts how many other nodes are accessible from
+it, grouped by path length. Taking the reference node as starting point:
+
+    $ curl -i -HAccept:application/json http://localhost:8080/stats/0
+
+Try running the `POST /neo_resource` above again and watch how the values returned by
+`stats` change!
 
 Moving forward, you will probably want to search the files for occurrences of
 `example` and replace them with something more appropriate.
