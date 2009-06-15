@@ -5,7 +5,8 @@ import javax.ws.rs.ext.{ContextResolver, Provider}
 import javax.xml.bind.JAXBContext
 
 /**
- * Defines the conversion of bean objects to/from JSON.
+ * Defines the conversion of bean objects to/from JSON. You only need this if you
+ * are using JAXB for JSON serialisation/unserialisation, like in <tt>MooResource</tt>.
  */
 @Provider
 class JAXBContextResolver extends ContextResolver[JAXBContext] {
