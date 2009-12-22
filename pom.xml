@@ -13,7 +13,9 @@
   <artifactId>neo4j-scala-template</artifactId>
   <name>neo4j-scala-template</name>
   <version>1.0-SNAPSHOT</version>
-
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
   <dependencies>
     <!-- Ept Computing Neo4j/Scala/REST resources library, includes
          Jersey and Neo4j dependencies. Install manually:
