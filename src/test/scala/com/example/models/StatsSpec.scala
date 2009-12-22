@@ -33,7 +33,7 @@ class StatsSpec extends Spec with ShouldMatchers with NeoConverters {
     it("should return the number of neighbours") {
       NeoServer.exec { neo =>
         val node = neo.createNode
-        (1 to 3) foreach { _ => node --| KNOWS --> neo.createNode }
+        (1 to 3) foreach { _ => node --> KNOWS --> neo.createNode }
         new Stats(node).toJSON.getInt("depth_1") should equal(3)
       }
     }
@@ -42,8 +42,8 @@ class StatsSpec extends Spec with ShouldMatchers with NeoConverters {
       NeoServer.exec { neo =>
         val start = neo.createNode
         val end = neo.createNode
-        start --| "KNOWS" --> neo.createNode --| "KNOWS" --> end
-        start --| "KNOWS" --> neo.createNode --| "KNOWS" --> end
+        start --> "KNOWS" --> neo.createNode --> "KNOWS" --> end
+        start --> "KNOWS" --> neo.createNode --> "KNOWS" --> end
         val stats = new Stats(start).toJSON
         stats.getInt("depth_1") should equal(2)
         stats.getInt("depth_2") should equal(1)
@@ -53,7 +53,7 @@ class StatsSpec extends Spec with ShouldMatchers with NeoConverters {
     it("should not follow inbound relationships") {
       NeoServer.exec { neo =>
         val node = neo.createNode
-        neo.createNode --| KNOWS --> node --| KNOWS --> neo.createNode
+        neo.createNode --> KNOWS --> node --> KNOWS --> neo.createNode
         new Stats(node).toJSON.getInt("depth_1") should equal(1)
       }
     }
@@ -61,8 +61,8 @@ class StatsSpec extends Spec with ShouldMatchers with NeoConverters {
     it("should not follow relationships of a different type") {
       NeoServer.exec { neo =>
         val node = neo.createNode
-        node --| "KNOWS" --> neo.createNode
-        node --| "LIKES" --> neo.createNode
+        node --> "KNOWS" --> neo.createNode
+        node --> "LIKES" --> neo.createNode
         new Stats(node).toJSON.getInt("depth_1") should equal(1)
       }
     }
@@ -71,8 +71,8 @@ class StatsSpec extends Spec with ShouldMatchers with NeoConverters {
       NeoServer.exec { neo =>
         val start = neo.createNode
         val reachByTwoPaths = neo.createNode
-        start --| KNOWS --> neo.createNode --| KNOWS --> reachByTwoPaths
-        start --| KNOWS --> neo.createNode --| KNOWS --> neo.createNode --| KNOWS --> reachByTwoPaths
+        start --> KNOWS --> neo.createNode --> KNOWS --> reachByTwoPaths
+        start --> KNOWS --> neo.createNode --> KNOWS --> neo.createNode --> KNOWS --> reachByTwoPaths
         val stats = new Stats(start).toJSON
         stats.getInt("depth_1") should equal(2)
         stats.getInt("depth_2") should equal(2)
