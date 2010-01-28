@@ -156,10 +156,5 @@ License
 
 Copyright (c) 2009 Ept Computing. Developed by Martin Kleppmann.
 
-This program is free software: you can redistribute it and/or modify it under the terms of
-the GNU Affero General Public License as published by the Free Software Foundation, version 3.
-See `LICENSE.txt` for details.
-
-Please note that the Affero GPL does not allow you to use this software in a closed-source
-web application. If distributing the source of your application is not acceptable to you,
-please contact [Ept Computing](http://www.eptcomputing.com/) to obtain a commercial license.
+This application template is made publicly available under the terms of the MIT license.
+See LICENSE.txt for details.
