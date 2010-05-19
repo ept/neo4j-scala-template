@@ -1,6 +1,6 @@
 package com.example.models;
 
-import org.neo4j.api.core.RelationshipType;
+import org.neo4j.graphdb.RelationshipType;
 
 // Scala can't produce Java-compatible enums, so they will have to be
 // defined in Java for now.

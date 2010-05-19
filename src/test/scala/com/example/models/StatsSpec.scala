@@ -6,9 +6,9 @@ import org.junit.runner.RunWith
 import com.jteigen.scalatest.JUnit4Runner
 
 import org.codehaus.jettison.json.JSONObject
-import org.neo4j.api.core._
+import org.neo4j.graphdb._
 
-import com.eptcomputing.neo4j.{NeoConverters, NeoServer}
+import com.eptcomputing.neo4j.{Neo4jConverters, Neo4jServer}
 
 /**
  * This is an example of how you can write good and expressive tests/specs using
@@ -17,21 +17,21 @@ import com.eptcomputing.neo4j.{NeoConverters, NeoServer}
  * API request/response cycles, see <tt>NeoResourceTest</tt>.
  */
 @RunWith(classOf[JUnit4Runner])
-class StatsSpec extends Spec with ShouldMatchers with NeoConverters {
+class StatsSpec extends Spec with ShouldMatchers with Neo4jConverters {
 
   import Predicates._
 
   describe("Stats model") {
 
     it("should return an empty object if the node has no relationships") {
-      NeoServer.exec { neo =>
+      Neo4jServer.exec { neo =>
         val node = neo.createNode
         new Stats(node).toJSON.length should equal(0)
       }
     }
 
     it("should return the number of neighbours") {
-      NeoServer.exec { neo =>
+      Neo4jServer.exec { neo =>
         val node = neo.createNode
         (1 to 3) foreach { _ => node --> KNOWS --> neo.createNode }
         new Stats(node).toJSON.getInt("depth_1") should equal(3)
@@ -39,7 +39,7 @@ class StatsSpec extends Spec with ShouldMatchers with NeoConverters {
     }
 
     it("should not count a node twice") {
-      NeoServer.exec { neo =>
+      Neo4jServer.exec { neo =>
         val start = neo.createNode
         val end = neo.createNode
         start --> "KNOWS" --> neo.createNode --> "KNOWS" --> end
@@ -51,7 +51,7 @@ class StatsSpec extends Spec with ShouldMatchers with NeoConverters {
     }
 
     it("should not follow inbound relationships") {
-      NeoServer.exec { neo =>
+      Neo4jServer.exec { neo =>
         val node = neo.createNode
         neo.createNode --> KNOWS --> node --> KNOWS --> neo.createNode
         new Stats(node).toJSON.getInt("depth_1") should equal(1)
@@ -59,7 +59,7 @@ class StatsSpec extends Spec with ShouldMatchers with NeoConverters {
     }
 
     it("should not follow relationships of a different type") {
-      NeoServer.exec { neo =>
+      Neo4jServer.exec { neo =>
         val node = neo.createNode
         node --> "KNOWS" --> neo.createNode
         node --> "LIKES" --> neo.createNode
@@ -68,7 +68,7 @@ class StatsSpec extends Spec with ShouldMatchers with NeoConverters {
     }
 
     it("should count only the shortest path to each reachable node") {
-      NeoServer.exec { neo =>
+      Neo4jServer.exec { neo =>
         val start = neo.createNode
         val reachByTwoPaths = neo.createNode
         start --> KNOWS --> neo.createNode --> KNOWS --> reachByTwoPaths

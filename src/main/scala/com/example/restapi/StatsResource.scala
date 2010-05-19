@@ -2,7 +2,7 @@ package com.example.restapi
 
 import javax.ws.rs.Path
 import org.codehaus.jettison.json.JSONObject
-import org.neo4j.api.core.{NeoService, Node}
+import org.neo4j.graphdb.{GraphDatabaseService, Node}
 
 import com.example.models.Stats
 
@@ -12,13 +12,13 @@ import com.example.models.Stats
  * class implements the actual query.
  */
 @Path("/stats")
-class StatsResource extends com.eptcomputing.neo4j.rest.NeoResource {
+class StatsResource extends com.eptcomputing.neo4j.rest.Neo4jResource {
 
-  def read(neo: NeoService, node: Node) = new Stats(node).toJSON
+  def read(neo: GraphDatabaseService, node: Node) = new Stats(node).toJSON
 
-  def create(neo: NeoService, json: JSONObject) = throw new Exception("not allowed")
+  def create(neo: GraphDatabaseService, json: JSONObject) = throw new Exception("not allowed")
 
-  def update(neo: NeoService, existing: Node, newValue: JSONObject) = throw new Exception("not allowed")
+  def update(neo: GraphDatabaseService, existing: Node, newValue: JSONObject) = throw new Exception("not allowed")
 
-  def delete(neo: NeoService, node: Node) = throw new Exception("not allowed")
+  def delete(neo: GraphDatabaseService, node: Node) = throw new Exception("not allowed")
 }

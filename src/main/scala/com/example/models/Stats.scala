@@ -2,7 +2,7 @@ package com.example.models
 
 import java.util.logging.Logger
 import org.codehaus.jettison.json.JSONObject
-import org.neo4j.api.core._
+import org.neo4j.graphdb._
 import com.eptcomputing.neo4j.IteratorConverters
 
 /**

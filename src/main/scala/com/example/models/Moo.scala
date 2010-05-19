@@ -3,7 +3,7 @@ package com.example.models
 import javax.xml.bind.annotation.XmlRootElement
 import javax.xml.bind.annotation.XmlRegistry
 
-import org.neo4j.api.core.NeoService
+import org.neo4j.graphdb.GraphDatabaseService
 
 /**
  * Example of using a model object which can be automatically serialized/unserialized
@@ -18,11 +18,11 @@ import org.neo4j.api.core.NeoService
 class Moo(var colourOfSpots: java.lang.String) {
 
   /** Constructor which loads the colourOfSpots property from the Neo reference node */
-  def this(neo: NeoService) =
+  def this(neo: GraphDatabaseService) =
     this(neo.getReferenceNode.getProperty("cowColour", "brown").asInstanceOf[String])
 
   /** Save this model object to Neo */
-  def save(neo: NeoService) = neo.getReferenceNode.setProperty("cowColour", colourOfSpots)
+  def save(neo: GraphDatabaseService) = neo.getReferenceNode.setProperty("cowColour", colourOfSpots)
 
   /** Zero-argument constructor is required */
   private [models] def this() = this(null.asInstanceOf[String])

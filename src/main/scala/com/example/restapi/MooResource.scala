@@ -3,7 +3,7 @@ package com.example.restapi
 import javax.ws.rs._
 import javax.ws.rs.core._
 
-import com.eptcomputing.neo4j.NeoServer
+import com.eptcomputing.neo4j.Neo4jServer
 import com.example.models.Moo
 
 /**
@@ -24,7 +24,7 @@ class MooResource {
   @Consumes(Array(MediaType.APPLICATION_JSON))
   @Produces(Array(MediaType.APPLICATION_JSON))
   def setMostRecentlySeenCow(cow: Moo) = {
-    NeoServer.exec { neo => cow.save(neo) }
+    Neo4jServer.exec { neo => cow.save(neo) }
     cow
   }
 
@@ -34,6 +34,6 @@ class MooResource {
    */
   @GET
   @Produces(Array(MediaType.APPLICATION_JSON))
-  def getCow = NeoServer.exec { neo => new Moo(neo) }
+  def getCow = Neo4jServer.exec { neo => new Moo(neo) }
 
 }

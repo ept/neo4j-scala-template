@@ -3,7 +3,7 @@ package com.example.restapi
 import java.util.logging.Logger
 import javax.ws.rs._
 
-import com.eptcomputing.neo4j.NeoServer
+import com.eptcomputing.neo4j.Neo4jServer
 import com.eptcomputing.neo4j.rest.RequiredParam
 import com.example.models.Predicates
 
@@ -24,7 +24,7 @@ class ManualResource extends RequiredParam {
   @POST @Produces(Array("text/plain"))
   def helloWorld: String = {
     // Execute the following inside a Neo4j transaction
-    NeoServer.exec(neo => {
+    Neo4jServer.exec(neo => {
       val firstNode = neo.createNode
       val secondNode = neo.createNode
       val relationship = firstNode.createRelationshipTo(secondNode, Predicates.KNOWS)
