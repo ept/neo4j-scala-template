@@ -2,8 +2,8 @@ package com.example.models
 
 import org.scalatest.Spec
 import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.junit.JUnitRunner
 import org.junit.runner.RunWith
-import com.jteigen.scalatest.JUnit4Runner
 
 import org.codehaus.jettison.json.JSONObject
 import org.neo4j.graphdb._
@@ -16,7 +16,7 @@ import com.eptcomputing.neo4j.{Neo4jConverters, Neo4jServer}
  * directly, without going through the REST API. For an example of testing full
  * API request/response cycles, see <tt>NeoResourceTest</tt>.
  */
-@RunWith(classOf[JUnit4Runner])
+@RunWith(classOf[JUnitRunner])
 class StatsSpec extends Spec with ShouldMatchers with Neo4jConverters {
 
   import Predicates._

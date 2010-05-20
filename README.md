@@ -28,26 +28,19 @@ You need a Java 5 (or newer) environment and Maven 2.0.9 (or newer) installed:
     Java version: 1.6.0_03-p3
     OS name: "darwin" version: "9.7.0" arch: "i386" Family: "unix"
 
-Install the [JUnit4 Runner for ScalaTest](http://github.com/teigen/scalatest-junit4runner/tree/master)
-as follows:
-
-    $ git clone git://github.com/teigen/scalatest-junit4runner.git
-    $ cd scalatest-junit4runner
-    $ mvn clean install
-
 (If you're not familiar with Maven -- the first time you
 build a project, it downloads what seems like the entire universe to a local repository
 in your home directory (all the dependencies of this project and the plugins it needs
 to build and run it). It gets much better after that first time.)
 
-Next, install the [Neo4j resources library](http://github.com/ept/neo4j-resources/tree/master) --
+First install the [Neo4j resources library](http://github.com/ept/neo4j-resources) --
 if you get errors, please see the Troubleshooting section below.
 
     $ git clone git://github.com/ept/neo4j-resources.git
     $ cd neo4j-resources
     $ mvn clean install
 
-Finally, download this repository, or clone it with `git`, or merge it into your own
+Then download this repository, or clone it with `git`, or merge it into your own
 git repository, by one of the following:
 
 * Download [ZIP file](http://github.com/ept/neo4j-scala-template/zipball/master) or

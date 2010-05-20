@@ -1,9 +1,9 @@
 package com.example.models
 
+import scala.collection.JavaConversions._
 import java.util.logging.Logger
 import org.codehaus.jettison.json.JSONObject
 import org.neo4j.graphdb._
-import com.eptcomputing.neo4j.IteratorConverters
 
 /**
  * Example of a read-only model object. It is initialised with a Neo4j node and counts how many
@@ -12,7 +12,7 @@ import com.eptcomputing.neo4j.IteratorConverters
  *
  * Example tests for this class are given in <tt>StatsSpec</tt>.
  */
-class Stats(startNode: Node) extends IteratorConverters {
+class Stats(startNode: Node) {
   private val log = Logger.getLogger(this.getClass.getName)
 
   // Traverse the graph

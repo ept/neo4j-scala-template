@@ -31,7 +31,7 @@ public class NeoResourceTest extends JerseyTest {
      * Helper which creates a new entity via the API, and returns its ID.
      */
     private long createEntity(JSONObject entity) {
-        ClientResponse created = webResource.path("/neo_resource").type("application/json").
+        ClientResponse created = resource().path("/neo_resource").type("application/json").
             post(ClientResponse.class, entity);
         assertEquals(201, created.getStatus());
         return Long.parseLong(created.getLocation().getPath().replaceAll(".*/", ""));
@@ -40,7 +40,7 @@ public class NeoResourceTest extends JerseyTest {
     @Test
     public void testCreateEntity() throws JSONException {
         long id = createEntity(new JSONObject().put("key", "value"));
-        JSONObject read = webResource.path(String.format("/neo_resource/%d", id)).get(JSONObject.class);
+        JSONObject read = resource().path(String.format("/neo_resource/%d", id)).get(JSONObject.class);
         assertEquals("value", read.get("key"));
     }
 
@@ -51,11 +51,11 @@ public class NeoResourceTest extends JerseyTest {
 
         // Delete one, update two, leave three unchanged, add four
         JSONObject updated = new JSONObject().put("two", 22).put("three", 3).put("four", 4);
-        JSONObject readBack = webResource.path(String.format("/neo_resource/%d", id)).type("application/json").
+        JSONObject readBack = resource().path(String.format("/neo_resource/%d", id)).type("application/json").
             put(JSONObject.class, updated);
 
         // Also do a separate read, and make sure both have the right contents
-        JSONObject readSeparate = webResource.path(String.format("/neo_resource/%d", id)).get(JSONObject.class);
+        JSONObject readSeparate = resource().path(String.format("/neo_resource/%d", id)).get(JSONObject.class);
         JSONObject[] reads = {readBack, readSeparate};
         for (JSONObject read : reads) {
             try {
@@ -92,11 +92,11 @@ public class NeoResourceTest extends JerseyTest {
         ).put("_out",
             new JSONObject().put("ONE_TWO", one).put("TWO_THREE", new JSONArray().put(three).put(four))
         );
-        JSONObject readBack = webResource.path(String.format("/neo_resource/%d", two)).type("application/json").
+        JSONObject readBack = resource().path(String.format("/neo_resource/%d", two)).type("application/json").
             put(JSONObject.class, twoUpdate);
 
         // Also do a separate read, and make sure both have the right contents
-        JSONObject readSeparate = webResource.path(String.format("/neo_resource/%d", two)).get(JSONObject.class);
+        JSONObject readSeparate = resource().path(String.format("/neo_resource/%d", two)).get(JSONObject.class);
         JSONObject[] reads = {readBack, readSeparate};
         for (JSONObject read : reads) {
             JSONObject in = read.getJSONObject("_in");
@@ -128,10 +128,10 @@ public class NeoResourceTest extends JerseyTest {
         ));
 
         // Delete the first and check that it has gone
-        JSONObject response = webResource.path(String.format("/neo_resource/%d", id)).delete(JSONObject.class);
+        JSONObject response = resource().path(String.format("/neo_resource/%d", id)).delete(JSONObject.class);
         assertEquals("value", response.get("key"));
         try {
-            webResource.path(String.format("/neo_resource/%d", id)).get(JSONObject.class);
+            resource().path(String.format("/neo_resource/%d", id)).get(JSONObject.class);
             fail("Accessing an entity after it has been deleted should return 404");
         } catch (UniformInterfaceException e) {
             assertEquals(404, e.getResponse().getStatus());
